@@ -1,0 +1,313 @@
+import 'package:flutter/material.dart';
+import 'package:gotraining/modules/calendar/models/calendar_model.dart';
+import 'package:gotraining/modules/calendar/stores/calendar_stores.dart';
+import 'package:intl/intl.dart';
+import 'package:path/path.dart';
+
+import 'package:provider/provider.dart';
+import 'package:table_calendar/table_calendar.dart';
+
+class CalendarPage extends StatefulWidget {
+  const CalendarPage({super.key});
+
+  @override
+  State<CalendarPage> createState() => _CalendarPageState();
+}
+
+class _CalendarPageState extends State<CalendarPage> {
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => CalendarStore(),
+      child: Consumer<CalendarStore>(
+        builder: (context, store, _) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Agendamento'),
+            ),
+            body: Column(
+              children: [
+                TableCalendar(
+                  firstDay: DateTime(2000),
+                  lastDay: DateTime(2100),
+                  focusedDay: store.selectedDate ?? DateTime.now(),
+                  calendarFormat: CalendarFormat.month,
+                  onDaySelected: (selectedDate, focusedDate) {
+                    store.selectedDate = selectedDate;
+                    store.loadEventos();
+                  },
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: store.eventos.length,
+                    itemBuilder: (context, index) {
+                      final evento = store.eventos[index];
+                      return ListTile(
+                        title: Text(
+                          DateFormat('dd/MM/yyyy').format(evento.data.toUtc()),
+                        ),
+                        subtitle: Text(evento.descricao),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.edit),
+                              onPressed: () {
+                                _showEditarEventoDialog(context, store, evento);
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () {
+                                store.removerEvento(evento);
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+            floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () {
+                _showAdicionarEventoDialog(context, store);
+              },
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  void _showAdicionarEventoDialog(BuildContext context, CalendarStore store) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Adicionar Evento'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: store.tituloController,
+                decoration: InputDecoration(labelText: 'Título'),
+              ),
+              TextField(
+                controller: store.descricaoController,
+                decoration: InputDecoration(labelText: 'Descrição'),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: Text('Adicionar'),
+              onPressed: () {
+                final titulo = store.tituloController.text;
+                final descricao = store.descricaoController.text;
+                final evento = Evento(
+                  id: DateTime.now().millisecondsSinceEpoch,
+                  titulo: titulo,
+                  descricao: descricao,
+                  data: store.selectedDate!,
+                );
+                store.adicionarEvento(evento);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showEditarEventoDialog(
+      BuildContext context, CalendarStore store, Evento evento) {
+    store.tituloController.text = evento.titulo;
+    store.descricaoController.text = evento.descricao;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Editar Evento'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: store.tituloController,
+                decoration: InputDecoration(labelText: 'Título'),
+              ),
+              TextField(
+                controller: store.descricaoController,
+                decoration: InputDecoration(labelText: 'Descrição'),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: Text('Atualizar'),
+              onPressed: () {
+                final titulo = store.tituloController.text;
+                final descricao = store.descricaoController.text;
+                final eventoAtualizado = evento.copyWith(
+                  titulo: titulo,
+                  descricao: descricao,
+                );
+                store.atualizarEvento(eventoAtualizado);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+//////////////////////////////////////
+///
+///
+///import 'package:flutter/material.dart';
+import 'package:gotraining/modules/calendar/models/calendar_model.dart';
+import 'package:gotraining/modules/calendar/stores/calendar_stores.dart';
+import 'package:gotraining/modules/calendar/widgets/menu_buttom_widget.dart';
+import 'package:intl/intl.dart';
+import 'package:path/path.dart';
+
+import 'package:provider/provider.dart';
+import 'package:table_calendar/table_calendar.dart';
+
+class CalendarPage extends StatefulWidget {
+  const CalendarPage({super.key});
+
+  @override
+  State<CalendarPage> createState() => _CalendarPageState();
+}
+
+class _CalendarPageState extends State<CalendarPage> {
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => CalendarStore(),
+      child: Consumer<CalendarStore>(
+        builder: (context, store, _) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Agendamento'),
+            ),
+            body: Column(
+              children: [
+                TableCalendar(
+                  firstDay: DateTime(2000),
+                  lastDay: DateTime(2100),
+                  focusedDay: store.selectedDate ?? DateTime.now(),
+                  calendarFormat: CalendarFormat.month,
+                  onDaySelected: (selectedDate, focusedDate) {
+                    store.selectedDate = selectedDate;
+                    store.loadEventos();
+                  },
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: store.eventos.length,
+                    itemBuilder: (context, index) {
+                      final evento = store.eventos[index];
+                      return ListTile(
+                        title: Text(
+                          DateFormat('dd/MM/yyyy').format(evento.data.toUtc()),
+                        ),
+                        subtitle: Text(evento.tema),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.edit),
+                              onPressed: () {
+                                _showEditarEventoDialog(context, store, evento);
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () {
+                                store.removerEvento(evento);
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+            floatingActionButton: const MenuButtom(),
+          );
+        },
+      ),
+    );
+  }
+
+  void _showEditarEventoDialog(
+      BuildContext context, CalendarStore store, Evento evento) {
+    store.tituloController.text = evento.titulo;
+    store.descricaoController.text = evento.descricao;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Editar Evento'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: store.tituloController,
+                decoration: InputDecoration(labelText: 'Título'),
+              ),
+              TextField(
+                controller: store.descricaoController,
+                decoration: InputDecoration(labelText: 'Descrição'),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: Text('Atualizar'),
+              onPressed: () {
+                final titulo = store.tituloController.text;
+                final descricao = store.descricaoController.text;
+                final eventoAtualizado = evento.copyWith(
+                  titulo: titulo,
+                  descricao: descricao,
+                );
+                store.atualizarEvento(eventoAtualizado);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
