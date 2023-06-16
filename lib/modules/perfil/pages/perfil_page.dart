@@ -31,7 +31,7 @@ class _PerfilPageState extends State<PerfilPage> {
       body: ListView(children: [
         const CardImageName(),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -62,11 +62,11 @@ class _PerfilPageState extends State<PerfilPage> {
 
               const EnderecoItem(),
               //
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               const IdiomaItem(),
-              AlterarSenhaItem(),
+              const AlterarSenhaItem(),
             ],
           ),
         )

@@ -311,3 +311,26 @@ class _CalendarPageState extends State<CalendarPage> {
     );
   }
 }
+
+
+
+
+
+
+
+Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      // const Text("Esqueceu a senha?",
+                      //     style:
+                      //         TextStyle(fontSize: 18, color: Colors.white)),
+                      Row(children: [
+                        Checkbox(
+                            value: loginStore.isChecked,
+                            onChanged: (bool? value) => loginStore
+                                .checkboxValue(loginStore.isChecked = value!)),
+                        const Text("Lembre-me",
+                            style: TextStyle(fontSize: 18, color: Colors.white))
+                      ])
+                    ],
+                  ),

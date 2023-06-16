@@ -3,7 +3,7 @@ import 'package:gotraining/modules/login/mocks/login_mock.dart';
 
 class LoginStore extends ChangeNotifier {
   bool isChecked = false;
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController usuarioController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 

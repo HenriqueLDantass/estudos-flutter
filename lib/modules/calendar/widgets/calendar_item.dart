@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gotraining/modules/calendar/animation/calendar_animation.dart';
 import 'package:gotraining/modules/solicitados/pages/solicitado_page.dart';
 import 'package:gotraining/modules/agendamento/widgets/linha_com_bolinha.dart';
 
@@ -38,7 +39,7 @@ class _CalendarItemState extends State<CalendarItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
+        Navigator.of(context).push(CalendarAnimation(
           builder: (context) => SolicitadoPage(
             index: widget.index,
             calendario: widget.calendario,
@@ -78,9 +79,11 @@ class _CalendarItemState extends State<CalendarItem> {
           ),
           const LinhaComBolinha(),
           Container(
-            decoration: const BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+                color: widget.check == "c"
+                    ? Colors.green
+                    : (widget.check == "b" ? Colors.yellow : Colors.black),
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(5.0),
                   bottomLeft: Radius.circular(5.0),
                 )),
@@ -114,10 +117,20 @@ class _CalendarItemState extends State<CalendarItem> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        widget.loja,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.loja,
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          if (widget.check == "c")
+                            const Icon(
+                              Icons.check,
+                              color: Colors.green,
+                            ),
+                        ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

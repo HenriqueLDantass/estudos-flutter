@@ -22,10 +22,18 @@ class HomePageItem extends StatefulWidget {
 
 class _HomePageItemState extends State<HomePageItem> {
   @override
-  Widget build(BuildContext context) {
-    var agendamentoStore = Provider.of<AgendamentoStore>(context);
+  void initState() {
+    super.initState();
+    final store = Provider.of<HomeStore>(context, listen: false);
+    // store.updateSelectedDay(DateTime.now());
+    store.loadEventos();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     final store = Provider.of<HomeStore>(context);
+    final storeAgendamento = Provider.of<AgendamentoStore>(context);
+
     DateFormat mesFormatando = DateFormat('MMM yyyy', Platform.localeName);
     String mesFormatadoPadrao = mesFormatando.format(store.mesAtual);
 
@@ -61,7 +69,8 @@ class _HomePageItemState extends State<HomePageItem> {
           titleContainerFist: "Treinamento",
           titleContainerSecond: "Participantes",
           color: ColorsApp.colorItem,
-          numberContainerFirst: '0/',
+          numberContainerFirst:
+              '${storeAgendamento.valorChecking}/${store.eventos.length}',
           numberContainerSecond: '0',
         ),
         const GridCustom(

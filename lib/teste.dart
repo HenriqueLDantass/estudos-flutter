@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:gotraining/modules/agendamento/mocks/agendamento_mock.dart';
 
 class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _SearchScreenState createState() => _SearchScreenState();
 }
 
@@ -43,7 +44,7 @@ class _SearchScreenState extends State<SearchScreen> {
         title: TextField(
           controller: _searchController,
           onChanged: search,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Pesquisar',
           ),
         ),

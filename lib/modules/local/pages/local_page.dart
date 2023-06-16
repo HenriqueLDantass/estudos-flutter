@@ -4,7 +4,6 @@ import 'package:gotraining/modules/agendamento/stores/agendamento_store.dart';
 import 'package:gotraining/modules/agendamento/widgets/title_stepper_widget.dart';
 import 'package:gotraining/modules/local/models/remote_models.dart';
 import 'package:gotraining/modules/local/stores/local_store.dart';
-import 'package:gotraining/modules/local/widgets/dados_local_widget.dart';
 import 'package:gotraining/modules/local/widgets/info_adicionais.dart';
 import 'package:gotraining/modules/local/widgets/textfiel_api_widget.dart';
 import 'package:provider/provider.dart';

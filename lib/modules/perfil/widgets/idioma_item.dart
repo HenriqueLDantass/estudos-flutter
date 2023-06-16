@@ -40,7 +40,7 @@ class _IdiomaItemState extends State<IdiomaItem> {
         Center(
           child: ElevatedButton(
             onPressed: () {},
-            child: Text("Salvar  Alterações"),
+            child: const Text("Salvar  Alterações"),
           ),
         )
       ],

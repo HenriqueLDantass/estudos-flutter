@@ -21,6 +21,7 @@ class AgendamentoStore extends ChangeNotifier {
   GlobalKey<FormState> globalKeyTreinamento = GlobalKey<FormState>();
   GlobalKey<FormState> globalKeySolicitante = GlobalKey<FormState>();
   GlobalKey<FormState> globalKeyBusinessCenter = GlobalKey<FormState>();
+
   //
   final tipoTreinamento = ValueNotifier('');
   final tipoAvaliacaoTreinamento = ValueNotifier('');
@@ -42,7 +43,7 @@ class AgendamentoStore extends ChangeNotifier {
   final formatCalendar = DateFormat("dd/MM/yyyy");
   final format = DateFormat("HH:mm");
   DateTime diaFocado = DateTime.now();
-  late DateTime selectedDate = DateTime.parse(dateCalendarioFormat.text);
+  int valorChecking = 0;
 
   void updateSelectedDay(DateTime value) {
     selectedDate = value;
@@ -56,9 +57,14 @@ class AgendamentoStore extends ChangeNotifier {
 
 //logica agendamento
 /////////////////////////////////////////////////////////////
+  late DateTime selectedDate = DateTime.parse(dateCalendarioFormat.text);
+  int compararHorario(Evento a, Evento b) {
+    return a.horario.compareTo(b.horario);
+  }
 
   void loadEventos() async {
     final eventos = await DatabaseHelper.getEventos(selectedDate);
+    eventos.sort(compararHorario);
     this.eventos = eventos;
     notifyListeners();
   }
@@ -112,8 +118,7 @@ class AgendamentoStore extends ChangeNotifier {
       treinamento: valueTreinamento.toString(),
     );
     adicionarEvento(evento);
-    DatabaseHelper.getEventos(selectedDate);
-
+    loadEventos();
     notifyListeners();
   }
 
@@ -152,8 +157,6 @@ class AgendamentoStore extends ChangeNotifier {
     selectedDate = diaFocado;
     selectedDate = DateTime.now();
     databaseHelper = DatabaseHelper();
-    loadEventos();
-    notifyListeners();
   }
   Widget controlLocal(context, details) {
     return Padding(
@@ -211,6 +214,7 @@ class AgendamentoStore extends ChangeNotifier {
           ElevatedButton(
             onPressed: () {
               currentStep = 0;
+
               addEvent();
 
               Navigator.pop(context);

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gotraining/modules/agendamento/stores/agendamento_store.dart';
-
-import 'package:gotraining/modules/calendar/stores/calendar_stores.dart';
 import 'package:gotraining/modules/calendar/widgets/calendar_item.dart';
 import 'package:gotraining/modules/calendar/widgets/menu_buttom_widget.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -15,17 +14,18 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  late CalendarStore store;
-
   @override
   void initState() {
     super.initState();
-    store = CalendarStore();
+    final store = Provider.of<AgendamentoStore>(context, listen: false);
+    // store.updateSelectedDay(DateTime.now());
+    store.loadEventos();
   }
 
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<AgendamentoStore>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Minha agenda'),
@@ -45,9 +45,7 @@ class _CalendarPageState extends State<CalendarPage> {
               selectedDayPredicate: (day) {
                 return isSameDay(store.selectedDate, day);
               },
-              calendarFormat: store.isMonthFormat
-                  ? CalendarFormat.month
-                  : CalendarFormat.week,
+              calendarFormat: CalendarFormat.week,
               onDaySelected: (selectedDay, focusedDay) {
                 if (!isSameDay(store.selectedDate, selectedDay)) {
                   setState(() {
@@ -65,23 +63,31 @@ class _CalendarPageState extends State<CalendarPage> {
           Expanded(
             child: Consumer<AgendamentoStore>(
               builder: (context, store, _) {
-                return ListView.builder(
-                  itemCount: store.eventos.length,
-                  itemBuilder: (context, index) {
-                    final evento = store.eventos[index];
-                    return CalendarItem(
-                      timeInicio: evento.timeInicio,
-                      local: evento.local,
-                      timeTermino: evento.timeTermino,
-                      loja: evento.loja,
-                      treinamento: evento.treinamento,
-                      tema: evento.tema,
-                      index: index,
-                      calendario: evento.calendario,
-                      check: evento.checking,
-                    );
-                  },
-                );
+                if (store.eventos.isEmpty) {
+                  return const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text("Você não possui treinamentos para esta data."),
+                  );
+                } else {
+                  return ListView.builder(
+                    itemCount: store.eventos.length,
+                    itemBuilder: (context, index) {
+                      final evento = store.eventos[index];
+
+                      return CalendarItem(
+                        timeInicio: evento.timeInicio,
+                        local: evento.local,
+                        timeTermino: evento.timeTermino,
+                        loja: evento.loja,
+                        treinamento: evento.treinamento,
+                        tema: evento.tema,
+                        index: index,
+                        calendario: evento.calendario,
+                        check: evento.checking,
+                      );
+                    },
+                  );
+                }
               },
             ),
           ),

@@ -26,9 +26,11 @@ class SolicitadosStore extends ChangeNotifier {
     }
   }
 
+//rever este codigo
   List<File?> imagens = List.filled(6, null);
   final picker = ImagePicker();
   Future getImage(int index) async {
+    // ignore: deprecated_member_use
     final pickedFile = await picker.getImage(source: ImageSource.camera);
 
     if (pickedFile != null) {

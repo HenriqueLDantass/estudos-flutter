@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gotraining/core/utils/colors/app_colors.dart';
-import 'package:gotraining/modules/home/stores/home_store.dart';
-import 'package:gotraining/modules/home/widgets/title_vermais_widget.dart';
 import 'package:gotraining/modules/login/pages/login_page.dart';
 import 'package:gotraining/modules/perfil/pages/perfil_page.dart';
 import 'package:gotraining/modules/sync/pages/sync_page.dart';
-import 'package:provider/provider.dart';
 
 class DrawerCustom extends StatefulWidget {
   const DrawerCustom({super.key});

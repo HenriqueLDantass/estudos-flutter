@@ -1,9 +1,10 @@
 import 'package:sqflite/sqflite.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import '../modules/calendar/models/calendar_model.dart';
 
 class DatabaseHelper {
-  static final String tableName = 'eventos';
+  static const String tableName = 'eventos';
 
   static Future<Database> initDatabase() async {
     final dbPath = await getDatabasesPath();

@@ -42,7 +42,7 @@ class _FlotingActionButtonCustomState extends State<FlotingActionButtonCustom>
       delegate: Botoes(animation: animation),
       children: [
         FloatingActionButton(
-          heroTag: "01",
+          heroTag: "C01",
           backgroundColor: ColorsApp.colorItem,
           child: menuIsOpen.value == true
               ? const Icon(Icons.close)
@@ -55,7 +55,7 @@ class _FlotingActionButtonCustomState extends State<FlotingActionButtonCustom>
           },
         ),
         FloatingActionButton(
-          heroTag: "01",
+          heroTag: "C02",
           onPressed: () {
             setState(() {
               store.activePage = 0;
@@ -72,13 +72,13 @@ class _FlotingActionButtonCustomState extends State<FlotingActionButtonCustom>
           child: const Icon(Icons.person),
         ),
         FloatingActionButton(
-          heroTag: "02",
+          heroTag: "C03",
           onPressed: () {},
           backgroundColor: ColorsApp.colorItem,
           child: const Icon(Icons.share_rounded),
         ),
         FloatingActionButton(
-          heroTag: "03",
+          heroTag: "C04",
           onPressed: () {
             setState(() {
               menuIsOpen.value ? animation.reverse() : animation.forward();
@@ -92,13 +92,13 @@ class _FlotingActionButtonCustomState extends State<FlotingActionButtonCustom>
           child: const Icon(Icons.qr_code),
         ),
         FloatingActionButton(
-          heroTag: "04",
+          heroTag: "C05",
           onPressed: () {},
           backgroundColor: ColorsApp.colorItem,
           child: const Icon(Icons.attach_money_rounded),
         ),
         FloatingActionButton(
-          heroTag: "05",
+          heroTag: "C06",
           onPressed: () {
             // Chamar modal
             int index = store.imagens.indexWhere((image) => image == null);
@@ -111,7 +111,7 @@ class _FlotingActionButtonCustomState extends State<FlotingActionButtonCustom>
           child: const Icon(Icons.camera_alt_outlined),
         ),
         FloatingActionButton(
-          heroTag: "06",
+          heroTag: "C07",
           onPressed: () {
             setState(() {
               menuIsOpen.value ? animation.reverse() : animation.forward();
@@ -121,14 +121,14 @@ class _FlotingActionButtonCustomState extends State<FlotingActionButtonCustom>
                 isScrollControlled: true,
                 context: context,
                 builder: (BuildContext context) {
-                  return BottomModalWidget();
+                  return const BottomModalWidget();
                 });
           },
           backgroundColor: ColorsApp.colorItem,
           child: const Icon(Icons.message_outlined),
         ),
         FloatingActionButton(
-          heroTag: "07",
+          heroTag: "C08",
           onPressed: () {
             showDialog(
               context: context,

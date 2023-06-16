@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BottomModalWidget extends StatefulWidget {
-  BottomModalWidget({super.key});
+  const BottomModalWidget({super.key});
 
   @override
   State<BottomModalWidget> createState() => _BottomModalWidgetState();

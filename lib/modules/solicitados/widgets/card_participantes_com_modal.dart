@@ -18,14 +18,14 @@ class CardParticipantesComModalWidget extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text(""),
-                    content: Text("Faça o Checkout para ter o acesso."),
+                    title: const Text(""),
+                    content: const Text("Faça o Checkout para ter o acesso."),
                     actions: [
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text("Ok"),
+                        child: const Text("Ok"),
                       ),
                     ],
                   );
@@ -99,14 +99,14 @@ class CardParticipantesComModalWidget extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text(""),
-                    content: Text("Faça o Checkout para ter o acesso."),
+                    title: const Text(""),
+                    content: const Text("Faça o Checkout para ter o acesso."),
                     actions: [
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text("Ok"),
+                        child: const Text("Ok"),
                       ),
                     ],
                   );

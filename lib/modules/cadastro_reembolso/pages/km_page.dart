@@ -5,7 +5,10 @@ import 'package:gotraining/modules/cadastro_reembolso/widgets/textfiel_km.dart';
 import 'package:provider/provider.dart';
 
 class KmPage extends StatefulWidget {
+  const KmPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _KmPageState createState() => _KmPageState();
 }
 

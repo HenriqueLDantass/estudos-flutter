@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:gotraining/modules/agendamento/stores/agendamento_store.dart';
-import 'package:provider/provider.dart';
 
 class ValueDropdownButton extends StatelessWidget {
   final ValueListenable<String> valueListenable;
@@ -23,7 +21,6 @@ class ValueDropdownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<AgendamentoStore>(context);
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
       child: Column(

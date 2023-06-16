@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gotraining/modules/agendamento/stores/agendamento_store.dart';
-import 'package:gotraining/modules/solicitados/stores/dados_card_store.dart';
 import 'package:gotraining/modules/solicitados/widgets/card_participantes_com_modal.dart';
 import 'package:gotraining/modules/solicitados/widgets/card_participantes_widget.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 class SolicitadoScreen extends StatefulWidget {
   final String check;
@@ -17,8 +13,6 @@ class SolicitadoScreen extends StatefulWidget {
 class _SolicitadoScreenState extends State<SolicitadoScreen> {
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<AgendamentoStore>(context);
-
     return Column(
       children: [
         const SizedBox(

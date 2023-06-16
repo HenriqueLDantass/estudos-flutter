@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gotraining/modules/agendamento/mocks/agendamento_mock.dart';
-import 'package:gotraining/modules/agendamento/widgets/dropdown_widget.dart';
 import 'package:gotraining/modules/perfil/stores/perfil_store.dart';
 import 'package:gotraining/modules/perfil/widgets/dropbutton_custom.dart';
 import 'package:gotraining/modules/perfil/widgets/row_date_widget.dart';

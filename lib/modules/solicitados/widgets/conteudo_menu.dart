@@ -37,7 +37,7 @@ class _ConteudoMenuState extends State<ConteudoMenu> {
             checking: widget.check,
           ),
           const LogisticaScreen(),
-          FotosScreen(),
+          const FotosScreen(),
           const ComentarioScreen()
         ],
       ),

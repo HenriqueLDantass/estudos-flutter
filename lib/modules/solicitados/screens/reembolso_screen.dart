@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gotraining/modules/cadastro_reembolso/pages/cadastro_reembolso_page.dart';
 import 'package:gotraining/modules/home/widgets/grid_reembolso_widget.dart';
-import 'package:gotraining/modules/solicitados/widgets/card_participantes_com_modal.dart';
 
 class ReembolsoScreen extends StatefulWidget {
   final String checking;
@@ -31,14 +30,15 @@ class _ReembolsoScreenState extends State<ReembolsoScreen> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text(""),
-                          content: Text("Faça o Checkout para ter o acesso."),
+                          title: const Text(""),
+                          content:
+                              const Text("Faça o Checkout para ter o acesso."),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Text("Ok"),
+                              child: const Text("Ok"),
                             ),
                           ],
                         );

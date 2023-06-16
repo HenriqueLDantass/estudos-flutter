@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gotraining/core/utils/colors/app_colors.dart';
 import 'package:gotraining/modules/cadastro_reembolso/pages/km_page.dart';
-import 'package:gotraining/modules/cadastro_reembolso/widgets/tabbar_km.dart';
 
 class CadastroReembolsoPage extends StatelessWidget {
   const CadastroReembolsoPage({super.key});
@@ -26,10 +25,10 @@ class CadastroReembolsoPage extends StatelessWidget {
                         height: 25,
                         child:
                             Image.asset("././assets/images/contabilidade.png")),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
-                    Text('Despesas'),
+                    const Text('Despesas'),
                   ],
                 ),
               ),
@@ -40,17 +39,17 @@ class CadastroReembolsoPage extends StatelessWidget {
                     SizedBox(
                         height: 30,
                         child: Image.asset("././assets/images/distancia.png")),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
-                    Text('KM'),
+                    const Text('KM'),
                   ],
                 ),
               ),
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

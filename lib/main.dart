@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gotraining/core/test/stores/teste_store.dart';
 import 'package:gotraining/modules/cadastro_reembolso/stores/cadastro_reembolso_store.dart';
 import 'package:gotraining/modules/home/widgets/button_navigation_widget.dart';
+import 'package:gotraining/modules/login/pages/login_page.dart';
 import 'package:gotraining/modules/perfil/stores/perfil_store.dart';
 import 'package:gotraining/modules/solicitados/stores/dados_card_store.dart';
 import 'package:gotraining/core/utils/colors/app_colors.dart';
@@ -15,8 +16,6 @@ import 'package:gotraining/modules/local/stores/local_store.dart';
 import 'package:gotraining/modules/login/stores/login_store.dart';
 import 'package:gotraining/modules/motivometro/stores/motivometro_store.dart';
 import 'package:gotraining/modules/reembolso/stores/reembolso_store.dart';
-import 'package:gotraining/teste.dart';
-
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
@@ -79,19 +78,20 @@ class MyApp extends StatelessWidget {
         //TestStore
       ], //
       child: MaterialApp(
-          localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('pt', 'BR'),
-          ],
-          theme: ThemeData(
-              colorScheme: ColorScheme.fromSwatch()
-                  .copyWith(primary: ColorsApp.colorItem)),
-          debugShowCheckedModeBanner: false,
-          home: const ButtonNavigation()),
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('pt', 'BR'),
+        ],
+        theme: ThemeData(
+            colorScheme: ColorScheme.fromSwatch()
+                .copyWith(primary: ColorsApp.colorItem)),
+        debugShowCheckedModeBanner: false,
+        home: const ButtonNavigation(),
+      ),
     );
   }
 }

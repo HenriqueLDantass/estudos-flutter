@@ -1,24 +1,24 @@
+import 'package:flutter/material.dart';
 import 'package:gotraining/core/shared/functions/validators.dart';
 import 'package:gotraining/core/utils/colors/app_colors.dart';
 import 'package:gotraining/core/utils/images/login_images.dart';
 import 'package:gotraining/modules/calendar/animation/calendar_animation.dart';
+import 'package:gotraining/modules/login/pages/login_page.dart';
 import 'package:gotraining/modules/login/stores/login_store.dart';
 import 'package:gotraining/modules/login/widgets/checkbox_widget.dart';
 import 'package:gotraining/modules/login/widgets/logo_custom_widget.dart';
 import 'package:gotraining/modules/login/widgets/textfield_custom_widget.dart';
 import 'package:gotraining/modules/preload/pages/preload_page.dart';
-import 'package:gotraining/modules/recuperar_senha/pages/recuperar_senha_page.dart';
 import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
-import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RecupeerarSenhaPage extends StatelessWidget {
+  const RecupeerarSenhaPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ///
     final loginStore = Provider.of<LoginStore>(context);
+
     return Scaffold(
       body: Stack(children: [
         Image.asset(
@@ -39,26 +39,12 @@ class LoginPage extends StatelessWidget {
               children: [
                 const LogoCustom(),
                 TextFielCustom(
-                  controller: loginStore.usuarioController,
-                  title: 'Usuário',
-                  validatorless: Validatorless.multiple([
-                    Validatorless.required("Nome obrigatorio"),
-                    Validatos.nomeLogin('Nome invalido')
-                  ]),
-                ),
-                TextFielCustom(
                   controller: loginStore.senhaController,
-                  title: 'Senha',
+                  title: 'Email',
                   validatorless: Validatorless.multiple([
                     Validatorless.required("Senha obrigatoria"),
-                    Validatos.nomeLogin('Senha invalida')
+                    Validatos.nomeLogin('Senha invalida') // alterar globalkey
                   ]),
-                ),
-                CheckboxWidget(
-                  isChecked: loginStore.isChecked,
-                  onChanged: (bool? value) {
-                    loginStore.checkboxValue(value);
-                  },
                 ),
                 const SizedBox(
                   height: 50,
@@ -79,7 +65,7 @@ class LoginPage extends StatelessWidget {
                     },
                     // ignore: sort_child_properties_last
                     child: const Text(
-                      "LOGIN",
+                      "RECUPERAR",
                       style: TextStyle(fontSize: 16),
                     ),
                     style: ButtonStyle(
@@ -94,9 +80,9 @@ class LoginPage extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(CalendarAnimation(
-                        builder: (context) => const RecupeerarSenhaPage()));
+                        builder: (context) => const LoginPage()));
                   },
-                  child: const Text("Esqueceu a senha?",
+                  child: const Text("Cancelar e voltar",
                       style: TextStyle(fontSize: 18, color: Colors.white)),
                 ),
               ],

@@ -1,14 +1,15 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:gotraining/core/utils/colors/app_colors.dart';
 import 'package:gotraining/modules/agendamento/stores/agendamento_store.dart';
-import 'package:gotraining/modules/calendar/models/calendar_model.dart';
-import 'package:gotraining/modules/calendar/stores/calendar_stores.dart';
 import 'package:gotraining/modules/solicitados/widgets/card_grey_widget.dart';
 import 'package:gotraining/modules/solicitados/widgets/checkout_widget.dart';
 import 'package:gotraining/modules/solicitados/widgets/conteudo_menu.dart';
 import 'package:gotraining/modules/solicitados/widgets/flotingacitonbutton_widget.dart';
 import 'package:gotraining/modules/solicitados/widgets/header_solicitado.dart';
 import 'package:gotraining/modules/solicitados/widgets/scroll_titulo_widget.dart';
+import 'package:intl/intl.dart';
 
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,7 @@ class SolicitadoPage extends StatefulWidget {
   final int index;
   String check;
 
+  // ignore: use_key_in_widget_constructors
   SolicitadoPage({
     Key? key,
     required this.loja,
@@ -106,39 +108,79 @@ class _TestePageState extends State<SolicitadoPage> {
           ? FloatingActionButton(
               backgroundColor: ColorsApp.colorItem,
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Iniciar Treinamento'),
-                      content: const Text(
-                          'Deseja confirmar o início do treinamento nesta data e horário?'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('CANCELAR'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              widget.check = "b";
-                            });
-                            if (evento != null) {
-                              storeCalendar.editarEvento(
-                                  storeCalendar, evento, widget.check);
-                            }
+                //colocar no provider
+                final now = DateTime.now();
+                final today = DateTime(now.year, now.month, now.day);
+                final dateFormat = DateFormat('dd/MM/yyyy');
+                final calendarioDate = dateFormat.parse(widget.calendario);
+                //
+                if (widget.check == 'a' && calendarioDate != today) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('AVISO!'),
+                        content: const Text(
+                            'Você está realizando o Checkout em um dia diferente do programado. Deseja continuar?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('CANCELAR'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                widget.check = "b";
+                              });
+                              if (evento != null) {
+                                storeCalendar.editarEvento(
+                                    storeCalendar, evento, widget.check);
+                              }
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('CONTINUAR'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Iniciar Treinamento'),
+                        content: const Text(
+                            'Deseja confirmar o início do treinamento nesta data e horário?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('CANCELAR'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                widget.check = "b";
+                              });
+                              if (evento != null) {
+                                storeCalendar.editarEvento(
+                                    storeCalendar, evento, widget.check);
+                              }
 
-                            // localizacao
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('CONFIRMAR'),
-                        ),
-                      ],
-                    );
-                  },
-                );
+                              // localizacao
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('CONFIRMAR'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
               },
               child: const Icon(Icons.location_on),
             )
@@ -147,6 +189,7 @@ class _TestePageState extends State<SolicitadoPage> {
                   onpressed: () {
                     setState(() {
                       widget.check = "c";
+                      storeCalendar.valorChecking++;
                     });
                     if (evento != null) {
                       storeCalendar.editarEvento(

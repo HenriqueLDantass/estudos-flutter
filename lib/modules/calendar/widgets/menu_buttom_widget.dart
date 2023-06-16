@@ -37,7 +37,7 @@ class _MenuButtomState extends State<MenuButtom>
       delegate: FabVerticalDelegate(animation: animation),
       children: [
         FloatingActionButton(
-          heroTag: "0",
+          heroTag: "A0",
           backgroundColor: ColorsApp.actionButtonColor,
           child: AnimatedIcon(
             icon: AnimatedIcons.menu_close,
@@ -46,7 +46,7 @@ class _MenuButtomState extends State<MenuButtom>
           onPressed: () => toggleMenu(),
         ),
         FloatingActionButton(
-          heroTag: "1",
+          heroTag: "A1",
           onPressed: () {
             setState(() {
               menuIsOpen.value ? animation.reverse() : animation.forward();
@@ -62,7 +62,7 @@ class _MenuButtomState extends State<MenuButtom>
           child: const Icon(Icons.checklist_rtl_sharp),
         ),
         FloatingActionButton(
-          heroTag: "2",
+          heroTag: "A2",
           onPressed: () {
             setState(() {
               menuIsOpen.value ? animation.reverse() : animation.forward();
@@ -75,7 +75,7 @@ class _MenuButtomState extends State<MenuButtom>
           child: const Icon(Icons.apartment_rounded),
         ),
         FloatingActionButton(
-          heroTag: "3",
+          heroTag: "A3",
           onPressed: () {
             setState(() {
               menuIsOpen.value ? animation.reverse() : animation.forward();

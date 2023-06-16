@@ -32,7 +32,7 @@ class _CheckoutState extends State<Checkout>
       delegate: Botoes(animation: animation),
       children: [
         FloatingActionButton(
-          heroTag: "0",
+          heroTag: "B0",
           backgroundColor: ColorsApp.colorItem,
           child: menuIsOpen.value == true
               ? const Icon(Icons.close)
@@ -45,37 +45,37 @@ class _CheckoutState extends State<Checkout>
           },
         ),
         FloatingActionButton(
-          heroTag: "1",
+          heroTag: "B1",
           onPressed: () {},
           backgroundColor: Colors.grey,
           child: const Icon(Icons.person),
         ),
         FloatingActionButton(
-          heroTag: "2",
+          heroTag: "B2",
           onPressed: () {},
           backgroundColor: Colors.grey,
           child: const Icon(Icons.share_rounded),
         ),
         FloatingActionButton(
-          heroTag: "3",
+          heroTag: "B3",
           onPressed: () {},
           backgroundColor: Colors.grey,
           child: const Icon(Icons.qr_code),
         ),
         FloatingActionButton(
-          heroTag: "3",
+          heroTag: "B4",
           onPressed: () {},
           backgroundColor: ColorsApp.colorItem,
           child: const Icon(Icons.attach_money_rounded),
         ),
         FloatingActionButton(
-          heroTag: "5",
+          heroTag: "B5",
           onPressed: () {},
           backgroundColor: ColorsApp.colorItem,
           child: const Icon(Icons.camera_alt_outlined),
         ),
         FloatingActionButton(
-          heroTag: "6",
+          heroTag: "B6",
           onPressed: () {},
           backgroundColor: ColorsApp.colorItem,
           child: const Icon(Icons.message_outlined),
