@@ -6,6 +6,7 @@ import 'package:gotraining/modules/login/stores/login_store.dart';
 import 'package:gotraining/modules/login/widgets/checkbox_widget.dart';
 import 'package:gotraining/modules/login/widgets/logo_custom_widget.dart';
 import 'package:gotraining/modules/login/widgets/textfield_custom_widget.dart';
+import 'package:gotraining/modules/login/widgets/textfield_versenha.dart';
 import 'package:gotraining/modules/preload/pages/preload_page.dart';
 import 'package:gotraining/modules/recuperar_senha/pages/recuperar_senha_page.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class LoginPage extends StatelessWidget {
         Container(
           width: double.infinity,
           height: double.infinity,
-          color: Colors.black.withOpacity(0.1),
+          color: ColorsApp.colorPurpleClaro.withOpacity(0.2),
         ),
         Form(
           key: loginStore.formKey,
@@ -39,20 +40,21 @@ class LoginPage extends StatelessWidget {
               children: [
                 const LogoCustom(),
                 TextFielCustom(
-                  controller: loginStore.usuarioController,
-                  title: 'Usuário',
-                  validatorless: Validatorless.multiple([
+                  validator: Validatorless.multiple([
                     Validatorless.required("Nome obrigatorio"),
                     Validatos.nomeLogin('Nome invalido')
                   ]),
                 ),
-                TextFielCustom(
+                TextfielVerSenha(
                   controller: loginStore.senhaController,
                   title: 'Senha',
-                  validatorless: Validatorless.multiple([
+                  validator: Validatorless.multiple([
                     Validatorless.required("Senha obrigatoria"),
                     Validatos.nomeLogin('Senha invalida')
                   ]),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 CheckboxWidget(
                   isChecked: loginStore.isChecked,
@@ -88,7 +90,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 GestureDetector(

@@ -16,6 +16,7 @@ import 'package:gotraining/modules/local/stores/local_store.dart';
 import 'package:gotraining/modules/login/stores/login_store.dart';
 import 'package:gotraining/modules/motivometro/stores/motivometro_store.dart';
 import 'package:gotraining/modules/reembolso/stores/reembolso_store.dart';
+import 'package:gotraining/teste.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
@@ -90,7 +91,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSwatch()
                 .copyWith(primary: ColorsApp.colorItem)),
         debugShowCheckedModeBanner: false,
-        home: const ButtonNavigation(),
+        home: LoginPage(),
       ),
     );
   }

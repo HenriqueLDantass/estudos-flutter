@@ -39,12 +39,12 @@ class RecupeerarSenhaPage extends StatelessWidget {
               children: [
                 const LogoCustom(),
                 TextFielCustom(
-                  controller: loginStore.senhaController,
-                  title: 'Email',
-                  validatorless: Validatorless.multiple([
-                    Validatorless.required("Senha obrigatoria"),
-                    Validatos.nomeLogin('Senha invalida') // alterar globalkey
-                  ]),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Incorreto";
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 50,

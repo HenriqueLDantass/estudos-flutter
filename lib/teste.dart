@@ -1,62 +1,61 @@
 import 'package:flutter/material.dart';
 
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
-
+class LoginPageTeste extends StatefulWidget {
   @override
-  // ignore: library_private_types_in_public_api
-  _SearchScreenState createState() => _SearchScreenState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
-  List<String> mockData = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-    'Item 6',
-  ];
-
-  List<String> searchResults = [];
-
-  void search(String query) {
-    setState(() {
-      searchResults = mockData
-          .where((item) => item.toLowerCase().contains(query.toLowerCase()))
-          .toList();
-    });
-  }
-
-  void selectResult(String result) {
-    setState(() {
-      searchResults = [];
-    });
-    _searchController.text = result;
-  }
-
-  final TextEditingController _searchController = TextEditingController();
+class _LoginPageState extends State<LoginPageTeste> {
+  bool _passwordVisible = false;
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextField(
-          controller: _searchController,
-          onChanged: search,
-          decoration: const InputDecoration(
-            hintText: 'Pesquisar',
-          ),
-        ),
+        title: Text('Login'),
       ),
-      body: ListView.builder(
-        itemCount: searchResults.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Text(searchResults[index]),
-            onTap: () => selectResult(searchResults[index]),
-          );
-        },
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _usernameController,
+              decoration: InputDecoration(
+                labelText: 'Username',
+              ),
+            ),
+            SizedBox(height: 16.0),
+            TextField(
+              controller: _passwordController,
+              obscureText: !_passwordVisible,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _passwordVisible = !_passwordVisible;
+                    });
+                  },
+                  child: Icon(
+                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                String username = _usernameController.text;
+                String password = _passwordController.text;
+                // Implement your login logic here
+              },
+              child: Text('Login'),
+            ),
+          ],
+        ),
       ),
     );
   }

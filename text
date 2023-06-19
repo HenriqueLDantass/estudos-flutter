@@ -448,3 +448,9 @@ class _TestePageState extends State<SolicitadoPage> {
     store.atualizarEvento(evento); // Atualiza o evento no CalendarStore
   }
 }
+
+
+
+    final store = Provider.of<HomeStore>(context, listen: false);
+    // store.updateSelectedDay(DateTime.now());
+    store.loadEventos();
